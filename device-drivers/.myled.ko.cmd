@@ -1,1 +1,0 @@
-cmd_/home/pi/device-drivers/myled.ko := ld -r  -EL -T ./scripts/module-common.lds -T ./arch/arm/kernel/module.lds  --build-id  -o /home/pi/device-drivers/myled.ko /home/pi/device-drivers/myled.o /home/pi/device-drivers/myled.mod.o ;  true
