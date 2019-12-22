@@ -23,17 +23,18 @@ static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_
 	}
 	if (c == '0')
 	{
-		gpio_base[10] = 1 << 25;
+		gpio_base[10] = 1 << 14;
 	}
 	else if (c == '1')
 	{
-		gpio_base[7] = 1 << 25;
+		gpio_base[7] = 1 << 14;
 	}
 	printk(KERN_INFO "gpio_base: %d\n", gpio_base[10]);
 	//printk(KERN_INFO "recieved %c\n", c);
 	return 1; // <- returns data output (if the return value is 0, it will continue to return data resulting in an infinite loop)
 }
 
+#if 0
 static ssize_t sushi_read(struct file* filp, char* buf, size_t count, loff_t* pos)
 {
     int size = 0;
@@ -45,10 +46,11 @@ static ssize_t sushi_read(struct file* filp, char* buf, size_t count, loff_t* po
      size += sizeof(sushi);
     return size;
 }
+#endif
 
 static struct file_operations led_fops = {
 	.owner = THIS_MODULE,
-	.write = led_write,
+	.write = led_write
 	//.read = sushi_read
 };
 
@@ -58,7 +60,7 @@ static int __init init_mod(void)
 	int retval; //return value
 	gpio_base = ioremap_nocache(0x3f200000, 0xA0);
 
-	const u32 led = 25;
+	const u32 led = 14;
 	const u32 index = led/10;
 	const u32 shift = (led%10)*3;
 	const u32 mask = ~(0x7 << shift);
