@@ -1,6 +1,16 @@
 # my_led
 This is for the project for using LEDs in the Robot-System
 
+## What this does
+Luminates the LED by the CPU temperature by 3 levels.
+You can change the maximum and the minimal temperature (Celsius) to change when the LED luminate.
+By default, it is 40 degrees Celsius for the minimal temperature and 60 degrees Celsius for the maximum temperature.
+
+## What you'll need
+- ROS environment (The guy who made this did it in ROS Melodic)
+- Raspberry Pi (better with ubuntu) If you are using Raspbian, you will need to modify the kernel
+- bread board, 3 LED with different colors, and some resistors (around 200 Ohms)
+
 ## Instructions
 1. compile three device driver files (pin17/myled_17.c, pin23/myled_23.c, pin25/myled_25.c)
 2. active the modules and give them permission of access
