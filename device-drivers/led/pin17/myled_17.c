@@ -23,11 +23,11 @@ static ssize_t led_write(struct file* filp, const char* buf, size_t count, loff_
 	}
 	if (c == '0')
 	{
-		gpio_base[10] = 1 << 14;
+		gpio_base[10] = 1 << 17;
 	}
 	else if (c == '1')
 	{
-		gpio_base[7] = 1 << 14;
+		gpio_base[7] = 1 << 17;
 	}
 	printk(KERN_INFO "gpio_base: %d\n", gpio_base[10]);
 	//printk(KERN_INFO "recieved %c\n", c);
@@ -60,14 +60,14 @@ static int __init init_mod(void)
 	int retval; //return value
 	gpio_base = ioremap_nocache(0x3f200000, 0xA0);
 
-	const u32 led = 14;
+	const u32 led = 17;
 	const u32 index = led/10;
 	const u32 shift = (led%10)*3;
 	const u32 mask = ~(0x7 << shift);
 
 	gpio_base[index] = (gpio_base[index] & mask) | (0x1 << shift);
 
-	retval = alloc_chrdev_region(&dev, 0, 1, "myled");
+	retval = alloc_chrdev_region(&dev, 0, 1, "myled17");
 	if (retval < 0)
 	{
 		printk(KERN_ERR "alloc_chrdev_region failed.\n");
@@ -81,13 +81,13 @@ static int __init init_mod(void)
 		printk(KERN_ERR "cdev_add failed. major: %d, minor: %d\n", MAJOR(dev), MINOR(dev));
 		return retval;
 	}
-	cls = class_create(THIS_MODULE, "myled");
+	cls = class_create(THIS_MODULE, "myled17");
 	if (IS_ERR(cls))
 	{
 		printk(KERN_ERR "class_create failed.");
 		return PTR_ERR(cls);
 	}
-	device_create(cls, NULL, dev, NULL, "myled%d", MINOR(dev));
+	device_create(cls, NULL, dev, NULL, "myled17");
 	return 0;
 }
 
