@@ -24,3 +24,8 @@ By default, it is 40 degrees Celsius for the minimal temperature and 60 degrees 
 ## Video
 URL
 - https://www.youtube.com/watch?v=26f_r5yqvjk
+
+## Updates
+December 25, 2019</br>
+- Integrated three of the device drivers for the LEDs into one script
+	- Leaving the original three, (pin17, pin23, pin25) for stability (these three has been tested, and is stable)
